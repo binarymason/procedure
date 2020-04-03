@@ -1,3 +1,3 @@
 # Procedure
 
-Please view example jupyter notebook [here](docs/example.ipynb)
+Please view example jupyter notebook [here](https://github.com/binarymason/procedure/tree/master/docs/example.ipynb)
