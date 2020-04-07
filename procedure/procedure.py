@@ -9,6 +9,7 @@ class Procedure(object):
     def __init__(self, context=Context(), **kwargs):
         if len(kwargs) != 0:
             raise ValueError("Do not call a class by initializing it. Use ClassName.call() instead.")
+        self.name = self.__class__.__name__
         self.ctx = context
 
     def _execute(self):
