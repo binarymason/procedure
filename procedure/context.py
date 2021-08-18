@@ -1,8 +1,9 @@
 from .procedure_failure import ProcedureFailure
 
+
 class Context(object):
     def __init__(self, **kwargs):
-        self.verbose = False # default setting
+        self.verbose = False  # default setting
 
         self._kwargs = kwargs
         self._parse_kwargs(**kwargs)
@@ -11,7 +12,7 @@ class Context(object):
 
     # Return formatted string, when Context is printed to console
     def __repr__(self):
-        s =  " "
+        s = " "
         for k, v in sorted(self.__dict__.items()):
             if k in ["_kwargs"]:
                 continue
@@ -23,7 +24,7 @@ class Context(object):
             s += f"{k}={v} "
 
         s.strip()
-        return f"{self.name()}({s})" # => PipelineContext(success=True, ...)
+        return f"{self.name()}({s})"  # => PipelineContext(success=True, ...)
 
     def parent(self):
         return self._parent

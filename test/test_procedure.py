@@ -2,13 +2,18 @@ import pytest
 
 from procedure import Procedure, ProcedureFailure
 
+
 def test_it_exists():
     Procedure
+
 
 def test_it_raises_an_error_if_initialized_with_arguments():
     with pytest.raises(ValueError) as excinfo:
         Procedure(foo="bar", baz="bang")
-    assert str(excinfo.value) == "Do not call a class by initializing it. Use ClassName.call() instead."
+    assert (
+        str(excinfo.value)
+        == "Do not call a class by initializing it. Use ClassName.call() instead."
+    )
 
     class Example(Procedure):
         def run(self):
@@ -16,10 +21,15 @@ def test_it_raises_an_error_if_initialized_with_arguments():
 
     with pytest.raises(ValueError) as excinfo:
         Example(foo="bar", baz="bang")
-    assert str(excinfo.value) == "Do not call a class by initializing it. Use ClassName.call() instead."
+    assert (
+        str(excinfo.value)
+        == "Do not call a class by initializing it. Use ClassName.call() instead."
+    )
+
 
 def test_call_method_signature():
     Procedure.call(foo="bar", baz="bang")
+
 
 def test_call_returns_a_data_structure_with_result():
     r = Procedure.call()
@@ -40,7 +50,6 @@ def test_inheritance_signature():
     assert r.success == True
     assert r.foo == "bar"
     assert r.baz == "bang"
-
 
 
 def test_procedure_with_before_run_method():
@@ -66,6 +75,7 @@ def test_procedure_with_after_method():
     r = ExampleProcedure.call()
     assert r.foo == "after"
 
+
 def test_procedure_that_will_fail():
     class ExampleProcedure(Procedure):
         def run(self):
@@ -79,6 +89,7 @@ def test_procedure_that_will_fail():
     assert r.error == "boom"
     assert r.before
     assert not r.after
+
 
 def test_procedure_that_fails_hard():
     class ExampleProcedure(Procedure):

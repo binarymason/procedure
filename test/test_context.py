@@ -2,6 +2,7 @@ import pytest
 
 from procedure import Context, ProcedureFailure
 
+
 def test_it_is_created_with_unlimited_kwargs():
     ctx = Context(foo="bar", baz="bang")
     assert ctx.foo == "bar"
@@ -12,9 +13,11 @@ def test_it_is_created_with_unlimited_kwargs():
     assert ctx.c == "d"
     assert ctx.e == "f"
 
+
 def test_default_success_value():
     ctx = Context()
     assert ctx.success
+
 
 def test_failing_hard():
     ctx = Context()

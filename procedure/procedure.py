@@ -1,5 +1,6 @@
 from .context import Context, ProcedureFailure
 
+
 class Procedure(object):
     @classmethod
     def call(cls, **kwargs):
@@ -8,7 +9,9 @@ class Procedure(object):
 
     def __init__(self, context=Context(), **kwargs):
         if len(kwargs) != 0:
-            raise ValueError("Do not call a class by initializing it. Use ClassName.call() instead.")
+            raise ValueError(
+                "Do not call a class by initializing it. Use ClassName.call() instead."
+            )
         self.name = self.__class__.__name__
         self.ctx = context
 
@@ -20,7 +23,7 @@ class Procedure(object):
             self.after_run()
             self.ctx.succeeded()
         except ProcedureFailure as err:
-            if self.ctx.get("error") is None: # parent pipeline or workflow
+            if self.ctx.get("error") is None:  # parent pipeline or workflow
                 self.ctx.error = self.__class__.__name__ + "ProcedureFailure"
                 self.ctx.failure = True
                 self.ctx.success = False
@@ -48,4 +51,3 @@ class Procedure(object):
             self.ctx.status = "success"
         else:
             self.ctx.status = "failure"
-
